@@ -1,16 +1,5 @@
 # cchen13-rgb.github.io
 Class Website
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>This is a Title</title>
-   </head>
-   <body>
-      <h1>This Heading</h1>
-      <p>This is a paragraph.</p>
-   </body>
-</html>
-
 <!DOCTYPE html><!--document type declaration-->
 <html>
     <head><!-- a container for metadata -->
