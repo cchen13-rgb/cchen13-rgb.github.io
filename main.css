@@ -1,0 +1,122 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Figtree:ital,wght@0,300..900;1,300..900&family=Kapakana:wght@300..400&family=Libertinus+Keyboard&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Figtree:ital,wght@0,300..900;1,300..900&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Yarndings+12+Charted&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+.inter-tight-header {
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;   /* replace with 400, 500, etc., as needed */
+  font-style: normal;
+}
+
+.yarndings-12-charted-regular {
+  font-family: "Yarndings 12 Charted", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+.inter-tight-header {
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;    /* replace with any number 400–900 */
+  font-style: normal;
+}
+
+.vidaloka-regular {
+  font-family: "Vidaloka", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+    font-family: 'Libertinus Keyboard';
+    src: url('libertinuskeyboard-regular-webfont.woff2') format('woff2'),
+         url('libertinuskeyboard-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.libertinus-keyboard-regular {
+  font-family: "Libertinus Keyboard", system-ui, sans-serif;
+}
+
+.playfair-display-title {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.heading{color: rgb(0, 0, 0); font-family: "Playfair Display", serif; system-ui, sans-serif;display: inline;
+  font-weight: normal;
+  font-style: normal;font-size: 600%; align-items: center; align-self: center;margin-bottom: 20%;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+
+ #word-color {color: blue;font-style: italic;}
+
+ .one {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 5%;
+  position: relative; 
+  box-sizing: content-box;
+}
+
+.one::after {
+  content: "";
+  position: absolute;
+  bottom: 0;             
+  left: 50%;            
+  transform: translateX(-50%); /* center it horizontally */
+  width: 500px;          /* desired length of the border */
+  height: .05cm;        
+  background-color: black; 
+}
+
+body{font-family:"Archivo";
+  background-color:rgb(255, 255, 255);line-height:18pt; 
+  widows: 2;  /* Minimum lines at end of a block */
+  orphans: 2;  /* Minimum lines at start of a block */
+  grid-auto-columns: auto;
+}
+h2 {color: blue;line-height: 22pt;}
+.heading:hover{color: aquamarine;}
+
+.direct {
+  display: flex;            
+  justify-content: flex-end; 
+  padding: 10px;           
+  bac
+}
+
+
+.continue {color: blue;
+  font-size: 120%;
+  display: inline-flex;      
+  align-items: center;
+  text-decoration: none;    
+  cursor: pointer; 
+       
+}
+
+.continue svg {
+  width: 38px;   
+  height: 38px;
+  fill: blue;
+  display: block;}
