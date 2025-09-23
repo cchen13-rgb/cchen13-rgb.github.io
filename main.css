@@ -68,7 +68,7 @@
  #word-color {color: blue;font-style: italic;}
  #word-size {font-size: 30px; color: blue; align-items: center;}
  #word-size2 {font-size: 30px;color: blue;bottom: 10%;align-items: center;}
-.all2:hover{color: aliceblue;}
+
  .one {
   display: flex;
   align-items: center;
@@ -99,9 +99,11 @@ body{font-family:"Archivo";
   grid-auto-columns: auto;
 }
 
-.all:hover {color:aliceblue;}
+
 h2 {color: blue;line-height: 22pt;}
 .heading:hover{color: aquamarine;}
+
+h2:hover {color: aquamarine;}
 
 .direct {
   display: flex;            
@@ -110,6 +112,7 @@ h2 {color: blue;line-height: 22pt;}
   bac
 }
 
+.direct:hover{ font-size: 125%;}
 
 .continue {color: blue;
   font-size: 120%;
@@ -121,8 +124,14 @@ h2 {color: blue;line-height: 22pt;}
 }
 
 .continue svg {
-  width: 38px;   
-  height: 38px;
+  width: 18px;   
+  height: 18px;
+  fill: blue;
+  display: block;}
+
+.continue svg:hover {
+  width: 19px;   
+  height: 19px;
   fill: blue;
   display: block;}
 
@@ -142,16 +151,47 @@ color: black;
   justify-content: space-between
 }
 
-.child {
-  width: 10px;
-  height: 300px;
-  background-color: rgb(74, 74, 204);
+.big {
+ flex: 1;
+  display: flex;
+  flex-direction:column-reverse;
+  justify-content: space-between;
+}
+
+.child{
+  height: 30px;
+  background-color: green;
 }
 
 .child-flip {
-  height: 10px;
-  height: 300px;
-  background-color: blue;
-  position: absolute;
+  width: 30px;
+  height: 100%;
+  background-color: green;
 }
 
+nav ul li a {
+      color: rgb(0, 0, 0);
+      text-decoration: none;  
+      font-weight: bold;
+    }
+ nav ul {
+      list-style: none;      
+      margin: 10;
+      padding: 0;
+      display: flex;         
+      gap: 20px;        
+      justify-content: center;      
+    }
+
+    nav {
+      background-color: #ffffff;
+      padding: 10px 20px;
+    }
+        h2 {font-family: "Inter Tight", sans-serif}
+        .all {align-items: center; padding-left: 20%;padding-right: 20%; align-items: top; columns: 2;padding-bottom: 10%;}
+        nav{ align-items: center;}
+
+      .navigation {top: 30%;
+  left: 50%;}
+
+  
