@@ -15,7 +15,7 @@
 .inter-tight-header {
   font-family: "Inter Tight", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 200;   /* replace with 400, 500, etc., as needed */
+  font-weight: 200;   
   font-style: normal;
 }
 
@@ -27,7 +27,7 @@
 .inter-tight-header {
   font-family: "Inter Tight", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;    /* replace with any number 400–900 */
+  font-weight: 700;   
   font-style: normal;
 }
 
@@ -86,16 +86,16 @@
   position: absolute;
   bottom: 0;             
   left: 50%;            
-  transform: translateX(-50%); /* center it horizontally */
-  width: 500px;          /* desired length of the border */
+  transform: translateX(-50%); 
+  width: 500px;         
   height: .05cm;        
   background-color: black; 
 }
 
 body{font-family:"Archivo";
   background-color:rgb(255, 255, 255);line-height:18pt; 
-  widows: 2;  /* Minimum lines at end of a block */
-  orphans: 2;  /* Minimum lines at start of a block */
+  widows: 2;  
+  orphans: 2; 
   grid-auto-columns: auto;
 }
 

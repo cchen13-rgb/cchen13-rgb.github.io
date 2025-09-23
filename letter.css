@@ -1,0 +1,16 @@
+.shape2{ 
+  position: absolute;
+  bottom: 1px;
+  right: 500px;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  background-color: cornsilk;
+  border: solid 3px black;
+  justify-content: space-between
+}
+
+.shape2bro{ }
+.shape2mini{  height: 30px;
+  background-color: green;
+}
