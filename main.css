@@ -68,7 +68,7 @@
  #word-color {color: blue;font-style: italic;}
  #word-size {font-size: 30px; color: blue; align-items: center;}
  #word-size2 {font-size: 30px;color: blue;bottom: 10%;align-items: center;}
-
+.all2:hover{color: aliceblue;}
  .one {
   display: flex;
   align-items: center;
@@ -99,7 +99,7 @@ body{font-family:"Archivo";
   grid-auto-columns: auto;
 }
 
-.all:hover {color: aquamarine;}
+.all:hover {color:aliceblue;}
 h2 {color: blue;line-height: 22pt;}
 .heading:hover{color: aquamarine;}
 
