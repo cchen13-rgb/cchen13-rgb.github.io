@@ -12,6 +12,15 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
+h1 {
+  flex: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100;
+  font-size: 7rem;
+}
+
 .inter-tight-header {
   font-family: "Inter Tight", sans-serif;
   font-optical-sizing: auto;

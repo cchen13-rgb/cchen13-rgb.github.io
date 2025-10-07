@@ -1,7 +1,6 @@
 body {
     display: grid;
-    grid-template-columns: repeat(3, 350px);
-    grid-template-rows: repeat(2, 400px);
+
     gap: 60px;
     justify-content: center;
     align-content: center;
@@ -22,12 +21,12 @@ body {
 
 
   .shape1 {
-    background-color: #ffd5c2; /* peach */
+    background-color: #ffd5c2; 
   }
 
  
   .shape2 {
-    background-color: #c2e7ff; /* pastel blue */
+    background-color: #c2e7ff;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
