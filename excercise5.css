@@ -1,0 +1,10 @@
+.parent {
+    text-align: center;
+}
+
+button {
+    font-size: 20px;
+    padding: 20px;
+    background-color: #dcdcdc;
+    border: solid 1px rgb(0, 0, 0);
+}
