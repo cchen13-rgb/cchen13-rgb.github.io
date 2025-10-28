@@ -1,0 +1,341 @@
+/* --- General Reset --- */
+@font-face {
+  font-family: 'MyFont';
+  src: url('No-Culture-NO-SOUL-DEMO.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MyFont2';
+  src: url('Fibra-One-Light.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  color: #000000;
+}
+
+h1{font-family:'MyFont', sans-serif;font-size: 500px;}
+
+html, body {
+  font-family: "MyFont2", sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background: #f6f6f6;
+  transition: background 0.1s linear;
+}
+
+.info-text {
+  position: fixed;
+  top: 20px;
+  left: 20px;  
+  ...
+}
+
+/* Header */
+header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 50px;
+  z-index: 1000;
+  color: black;
+  font-weight: 600;
+}
+header div {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+header div:hover {
+  opacity: 0.5;
+}
+
+/* Landing Section */
+.landing {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.landing h1 {
+  font-size: 15em;
+  margin-bottom: 20px;
+  z-index: 10;
+  position: relative;
+}
+.landing p {
+  font-size: 1.4em;
+  max-width: 700px;
+  z-index: 10;
+  position: relative;
+  opacity: 0.85;
+}
+
+/* Landing Stickers*/
+.shape {
+  position: absolute;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+/* Parallax Section*/
+.parallax {
+  height: 250vh;
+  position: relative;
+  overflow: visible;
+  z-index: 5;
+  background: black;
+}
+.object {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 20;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.3s ease, filter 0.3s ease, opacity 0.8s ease;
+}
+.object.back {
+  filter: blur(4px);
+  opacity: 0.5;
+}
+.object:hover {
+  filter: brightness(1.1);
+}
+/* faded out */
+.object[style*="opacity: 0"] {
+  pointer-events: none;
+}
+
+/* Popup */
+.popup {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 0.9em;
+  max-width: 180px;
+  display: none;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  z-index: 9999;
+}
+.popup button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+}
+
+/*  Popup Card Style*/
+.popup {
+  position: absolute;
+  background: #e8e8e8;
+  border: 2px solid #333;
+
+  border-radius: 20px;
+  padding: 25px 30px;
+  width: 600px;  /* Changed from 380px to 600px */
+  min-width: 500px;  /* Added minimum width */
+  max-width: 600px;  /* Added maximum width */
+  display: none;
+  pointer-events: auto;
+  z-index: 9999;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  user-select: none;  /* Prevent text selection while dragging */
+}
+
+/* horizontal layout: */
+.popup-content-horizontal {
+  display: flex;
+  gap: 25px;
+  margin-top: 10px;
+}
+
+.popup-content-horizontal .popup-section {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* popup-section with both layouts: */
+.popup-section {
+  margin: 15px 0;
+  text-align: left;
+}
+
+/*  transition for landing text color */
+.landing h1,
+.landing p {
+  transition: color 0.3s ease;
+}
+
+/* Fun Facts Section */
+.fun-facts {
+  height: 100vh;
+  background: #000000;
+  color: black;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  text-align: left;
+  position: relative;
+}
+
+.facts-container {
+  background: #e8e8e8;
+  border: 0px solid #333;
+  border-radius: 20px;
+  padding: 50px 50px;
+  max-width: 2500px;
+  width: 25000px;
+  flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 10px;
+}
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.fact-box {
+  background: rgb(0, 0, 0);
+  border: 3px solid #333;
+  border-radius: 15px;
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fact-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.fact-box h3 {
+  font-family: 'MyFont2', sans-serif;
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #e6e6e6;
+}
+
+.fact-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #e6e6e6;
+}
+
+/ Update facts-container to accommodate grid */
+.facts-container {
+  background: #e8e8e8;
+  border: 0px solid #333;
+  border-radius: 20px;
+  padding: 80px 100px;
+  max-width: 1800px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.facts-container h2 {
+  font-family: 'MyFont2', sans-serif;
+  font-size: 13rem;
+  margin: 10;
+  letter-spacing: 2px;
+}
+
+.facts-container hr {
+  width: 100%;
+  border: none;
+  border-top: 2px dotted #333;
+  margin: 10px 0;
+}
+
+.facts-content {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.arrow {
+  background: none;
+  border: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.arrow:hover {
+  transform: scale(1.2);
+}
+
+#factText {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.6;
+
+
+}
+
+
+/* End Section*/
+.end-section {
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#scrollTop {
+    font-family: "MyFont2";
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#scrollTop:hover {
+  background: #f6f6f6;
+}
+
+.parallax .info-text {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+  z-index: 1000;
+  pointer-events: none;
+  text-align: left;
+}

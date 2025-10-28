@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     alert('Hello World!');
   });
   
+  const toggle = document.querySelector("Togglefull")
+
+  toggle.addEventListener("click",(event)=> { 
+    
+  })
 });
 
 
