@@ -27,8 +27,9 @@ window.addEventListener("DOMContentLoaded", () => {
         position: fixed;
         top: 70px;
         left: 50px;
-        background: rgba(255, 255, 255, 0.95);
-        border: 2px solid #000000ff;
+        opacity: 
+        background-image: url('Pictures/papertexture.png');
+        border: 2px dashed #000000ff;
         border-radius: 15px;
         padding: 20px;
         z-index: 10000;
@@ -142,19 +143,25 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Background fade , text color fade 
+  // Background fade , text color fade (Black and white)
   window.addEventListener("scroll", () => {
     const ratio = Math.min(window.scrollY / (landing.offsetHeight * 0.5), 1);
-    const gray = Math.round(246 * (1 - ratio));
+    const gray = Math.round(255 * (1 - ratio));
     document.body.style.background = `rgb(${gray}, ${gray}, ${gray})`;
     parallax.style.background = `rgb(${gray}, ${gray}, ${gray})`;
     
-    // Fade landing text to white 
+    // Fade landing text to white (black and white)
     const textColor = Math.round(255 * ratio);
     const landingH1 = landing.querySelector("h1");
     const landingP = landing.querySelector("p");
     if (landingH1) landingH1.style.color = `rgb(${textColor}, ${textColor}, ${textColor})`;
     if (landingP) landingP.style.color = `rgb(${textColor}, ${textColor}, ${textColor})`;
+    
+    // Fade trash pile heading from black to white
+    const trashPileHeading = parallax.querySelector(".info-text");
+    if (trashPileHeading) {
+      trashPileHeading.style.color = `rgb(${textColor}, ${textColor}, ${textColor})`;
+    }
   });
 
   // Landing Stickers 
@@ -271,7 +278,8 @@ window.addEventListener("DOMContentLoaded", () => {
       disposal: "Sort by material type and place in appropriate bin."
     }
   };
-
+  
+  //Parallax objects amount
   const parallaxObjects = [];
   const parallaxCount = 60;
 
@@ -357,9 +365,14 @@ window.addEventListener("DOMContentLoaded", () => {
       popup.classList.add("popup");
       popup.innerHTML = `
         <button class="close-btn">×</button>
-        <h2 class="popup-title">Recycle Tips</h2>
+        <div class="popup-header">
+          <img src="${obj.style.backgroundImage.slice(5, -2)}" alt="${info.name}" class="popup-image">
+          <div class="popup-header-text">
+            <h2 class="popup-title">Recycle Tips</h2>
+            <h3 class="popup-category">${info.name}</h3>
+          </div>
+        </div>
         <hr class="popup-divider">
-        <h3 class="popup-category">${info.name}</h3>
         <div class="popup-content-horizontal">
           <div class="popup-section">
             <strong>Recycling Info:</strong>
@@ -371,11 +384,33 @@ window.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       `;
-      popup.style.left = e.pageX + 20 + "px";
-      popup.style.top = e.pageY - 20 + "px";
+
+      // Popup Location - position to the left of cursor to avoid cutoff
+      const popupWidth = 600; // width of popup
+      let popupX = e.pageX - popupWidth - 20; // 20px gap from cursor
+      let popupY = e.pageY - 20;
+      
+      // If popup would go off left edge, position it to the right instead
+      if (popupX < 0) {
+        popupX = e.pageX + 20;
+      }
+      
+      // If popup would go off right edge, position it at right edge
+      if (popupX + popupWidth > window.innerWidth) {
+        popupX = window.innerWidth - popupWidth - 20;
+      }
+      
+      popup.style.left = popupX + "px";
+      popup.style.top = popupY + "px";
       document.body.appendChild(popup);
       popup.style.display = "block";
-      
+    
+      // Trigger animation
+      setTimeout(() => {
+        popup.classList.add("popup-appear");
+      }, 10);
+
+      // *Doesnt work (come back later)
       makeDraggable(popup);
       
       popup.querySelector(".close-btn").addEventListener("click", () => popup.remove());
@@ -406,6 +441,19 @@ window.addEventListener("DOMContentLoaded", () => {
       obj.style.transform = `translate(${obj.dataset.baseX}px, ${y}px) rotate(${obj.dataset.rotation}deg)`;
       obj.style.opacity = 1 - fadeProgress;
     });
+    
+    // Fun facts fade in/out animation based on scroll position
+    const factsContainer = document.querySelector(".facts-container");
+    if (factsContainer) {
+      const factsPosition = funFactsTop - window.innerHeight * 0.7;
+      const factsEnd = funFactsTop + window.innerHeight * 0.3;
+      
+      if (scroll >= factsPosition && scroll <= factsEnd) {
+        factsContainer.classList.add("visible");
+      } else {
+        factsContainer.classList.remove("visible");
+      }
+    }
   });
 
   // Reset button
@@ -446,7 +494,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const factsContainer = document.querySelector(".facts-container");
   if (factsContainer) {
     factsContainer.innerHTML = `
-      <h2>*FUN FACTS</h2>
+      <h2>*Fun Facts</h2>
       <hr>
       <div class="facts-grid"></div>
     `;
@@ -473,7 +521,5 @@ window.addEventListener("DOMContentLoaded", () => {
   const infoText = document.createElement("div");
   infoText.classList.add("info-text");
   infoText.textContent = "*Trash Pile";
-  infoText.style.left = "30px";
-  infoText.style.fontSize = "200px";
   parallax.appendChild(infoText);
 });
