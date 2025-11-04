@@ -425,8 +425,22 @@ window.addEventListener("DOMContentLoaded", () => {
     createParallaxObject(img);
   }
 
+  // Throttle function for better performance
+  function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+      const args = arguments;
+      const context = this;
+      if (!inThrottle) {
+        func.apply(context, args);
+        inThrottle = true;
+        setTimeout(() => inThrottle = false, limit);
+      }
+    }
+  }
+
   // Parallax scroll fade out before fun facts
-  window.addEventListener("scroll", () => {
+  const handleScroll = throttle(() => {
     const scroll = window.scrollY;
     const funFactsTop = funFacts.offsetTop;
 
@@ -445,7 +459,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // Fun facts fade in/out animation based on scroll position
     const factsContainer = document.querySelector(".facts-container");
     if (factsContainer) {
-      const factsPosition = funFactsTop - window.innerHeight * 0.7;
+      const factsPosition = funFactsTop - window.innerHeight * 0.3;
       const factsEnd = funFactsTop + window.innerHeight * 0.3;
       
       if (scroll >= factsPosition && scroll <= factsEnd) {
@@ -454,7 +468,9 @@ window.addEventListener("DOMContentLoaded", () => {
         factsContainer.classList.remove("visible");
       }
     }
-  });
+  }, 16); // ~60fps
+  
+  window.addEventListener("scroll", handleScroll);
 
   // Reset button
   resetBtn.addEventListener("click", startLandingStickers);
