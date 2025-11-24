@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Yokai Garden Prototype</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="world">
+
+    <!-- CLOCK -->
+    <div id="clock-wrapper">
+      <div id="clock">
+        <img id="clock-face" src="Pictures/clock.png" alt="clock">
+        <div id="clock-hand"></div>
+      </div>
+    </div>
+
+    <!-- UI -->
+    <div id="ui-bar">
+      <div id="time-display"></div>
+      <div class="stat">Offerings: <span id="offerings-count">0</span></div>
+      <button id="place-offering">Place Offering</button>
+    </div>
+
+    <!-- Garden -->
+    <div id="garden"></div>
+
+    <!-- Memo Log -->
+    <div id="memo-bar">
+      <ul id="log-list"></ul>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
