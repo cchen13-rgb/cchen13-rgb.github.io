@@ -133,7 +133,7 @@ function saveState() {
 const MEMO_COLORS = [
   "#a9a4f1ff",
   "#b0deffff",
-  "#f1a0a0ff",
+  "#ffacacff",
   "#f9e8aeff",
   "#f7f0f0ff"
 ];
