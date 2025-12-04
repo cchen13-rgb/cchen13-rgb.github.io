@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Yokai Garden Prototype</title>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Wix+Madefor+Display:wght@400..800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Opening -->
+  <div id="opening-overlay">
+    <img src="Pictures/YokaiOpening.png" alt="Yokai Garden opening logo">
+  </div>
+
+  <div id="world">
+
+    <!-- Yokai Index button -->
+    <div id="index-button-wrapper">
+      <button id="index-button">Yokai Index</button>
+    </div>
+
+    <!-- Top-right Home button -->
+    <div id="ui-bar">
+      <a id="home-button" href="../index.html">Home</a>
+    </div>
+
+    <!-- Garden -->
+    <div id="garden"></div>
+
+    <!-- Activity log panel -->
+    <div id="chat-log-wrapper" class="closed">
+
+
+      <!-- header with title + time pill -->
+      <div id="chat-log-header">
+        <span>Activity Log</span>
+        <div id="time-display"></div>
+      </div>
+
+      <!-- Empty message -->
+      <div id="chat-empty">no messages yet — please wait for a yokai…</div>
+
+      <ul id="chat-log"></ul>
+    </div>
+
+    <!-- Sakura / offering button -->
+    <button id="place-offering" class="sakura-btn">
+      <img src="Pictures/watercan.png" alt="Sakura offering" class="sakura-main">
+      <div class="sakura-count">Blessings: <span id="offerings-count">0</span></div>
+    </button>
+
+    <!-- Yokai index overlay -->
+    <div id="catalog-overlay">
+      <div id="catalog-inner">
+        <div id="catalog-header">
+          <div class="catalog-logo">Yokai Index</div>
+
+          <nav id="catalog-tabs">
+            <button class="catalog-tab active" data-filter="all">All Yokai</button>
+            <button class="catalog-tab" data-filter="night">Night Visitors</button>
+            <button class="catalog-tab" data-filter="day">Daytime Guests</button>
+          </nav>
+
+          <button id="catalog-close">✕</button>
+        </div>
+
+        <div id="catalog-grid"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="game.js"></script>
+</body>
+
+</html>

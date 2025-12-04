@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>pattern 3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: radial-gradient(circle at 10% 0%, #2c3e37 0, #63755d 40%, #b1bdcc 100%);
+            font-family: system-ui, sans-serif;
+            position: relative;
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            background: #ffffff;
+            opacity: 0;
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+            animation: twinkle 2.2s ease-out forwards;
+        }
+
+        .dot.small {
+            width: 2px;
+            height: 2px;
+        }
+
+        .dot.medium {
+            width: 4px;
+            height: 4px;
+        }
+
+        .dot.big {
+            width: 7px;
+            height: 7px;
+        }
+
+        @keyframes twinkle {
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="pattern-one.html">Pattern 1</a></li>
+                <li><a href="pattern-three.html">Pattern 3</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const minDim = Math.min(width, height);
+
+        const bursts = [
+            { x: width * 0.78, y: height * 0.45, maxRadius: minDim * 0.6 },
+            { x: width * 0.28, y: height * 0.25, maxRadius: minDim * 0.45 },
+            { x: width * 0.35, y: height * 0.8, maxRadius: minDim * 0.5 },
+            { x: width * 0.9, y: height * 0.9, maxRadius: minDim * 0.35 }
+        ];
+
+        let index = 0;
+
+        for (let b = 0; b < bursts.length; b++) {
+            const burst = bursts[b];
+            const rings = 9;
+            const startRadius = burst.maxRadius * 0.15;
+            const radiusStep = (burst.maxRadius - startRadius) / rings;
+
+            for (let r = 0; r < rings; r++) {
+                const radius = startRadius + r * radiusStep;
+                const count = 80 + r * 8;
+
+                for (let i = 0; i < count; i++) {
+                    const angle = (2 * Math.PI * i) / count;
+                    const jitter = radius * 0.02;
+                    const x = burst.x + Math.cos(angle) * radius + (Math.random() - 0.5) * jitter;
+                    const y = burst.y + Math.sin(angle) * radius + (Math.random() - 0.5) * jitter;
+
+                    const dot = document.createElement("div");
+                    dot.classList.add("dot");
+
+                    if ((i + r) % 9 === 0) {
+                        dot.classList.add("big");
+                    } else if ((i + r) % 3 === 0) {
+                        dot.classList.add("medium");
+                    } else {
+                        dot.classList.add("small");
+                    }
+
+                    dot.style.left = x + "px";
+                    dot.style.top = y + "px";
+
+                    const delay = index * 0.008 + b * 0.3;
+                    dot.style.animationDelay = delay + "s";
+
+                    document.body.appendChild(dot);
+                    index++;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+.parent {
+    text-align: center;
+}
+
+button {
+    font-size: 20px;
+    padding: 20px;
+    background-color: #dcdcdc;
+    border: solid 1px rgb(0, 0, 0);
+}
+
+.Togglefull {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 48px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 48px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(82, 0, 149);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #ddff00;
+}
+
+input:checked + .slider:before {
+  transform: translateX(42px);
+}

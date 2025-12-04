@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <title>pattern 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .playfair-display-title {
+            font-family: "Playfair Display", serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .bod {
+            width: 110vw;
+            height: 100vh;
+            overflow: hidden;
+            background: #fafafa;
+            font-family: "Playfair Display", serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .field {
+            position: relative;
+            width: 240vw;
+            height: 120vh;
+        }
+
+        .letter {
+            position: absolute;
+            font-size: 30px;
+            color: #222;
+            letter-spacing: 0.08em;
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        .letter.em {
+            font-size: 30px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navigation">
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="pattern-one.html">Pattern 1</a></li>
+                <li><a href="pattern-two.html">Pattern 2</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="bod">
+        <div class="field" id="field"></div>
+
+        <script>
+            const field = document.getElementById("field");
+            const w = field.clientWidth;
+            const h = field.clientHeight;
+
+            const word = "wavy";
+
+            const rows = 8;
+            const cols = 6;
+
+            const rowSpacing = h / (rows + 1);
+            const wordWidth = w / cols;
+            const baseAmplitude = rowSpacing * 0.35;
+
+            let index = 0;
+
+            for (let r = 0; r < rows; r++) {
+
+                const amplitude = baseAmplitude * (0.9 + Math.random() * 0.3);
+
+                for (let c = 0; c < cols; c++) {
+
+                    for (let i = 0; i < word.length; i++) {
+                        const ch = word[i];
+
+                        const span = document.createElement("span");
+                        span.textContent = ch;
+                        span.classList.add("letter");
+
+                        if (i % 2 === 0) {
+                            span.classList.add("em");
+                        }
+
+                        const baseX = c * wordWidth + (wordWidth * 0.1);
+                        const letterSpacing = wordWidth * 0.18;
+                        const x = baseX + i * letterSpacing;
+
+                        const baseY = (r + 1) * rowSpacing;
+                        const y = baseY + Math.sin(i * 0.8 + r * 0.6) * amplitude;
+
+                        span.style.left = x + "px";
+                        span.style.top = y + "px";
+
+                        span.style.animationDelay = (i * 0.15 + r * 0.35) + "s";
+
+                        field.appendChild(span);
+                        index++;
+                    }
+                }
+            }
+        </script>
+    </div>
+
+
+</body>
+
+</html>

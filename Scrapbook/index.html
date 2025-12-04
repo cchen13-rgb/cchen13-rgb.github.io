@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Travel Scrapbook – Spread</title>
@@ -11,7 +12,9 @@
       --spark-particle: #c9e6ff;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -75,7 +78,8 @@
       top: 50%;
       height: 1.5px;
       transform: translateY(-50%);
-      background: rgba(255,255,255,0.7); /* thin white line */
+      background: rgba(255, 255, 255, 0.7);
+      /* thin white line */
       pointer-events: none;
     }
 
@@ -84,9 +88,9 @@
       width: 12px;
       height: 12px;
       border-radius: 999px;
-      border: 2px solid rgba(255,255,255,0.7);
-      background: rgba(10,20,40,0.0);
-      box-shadow: 0 0 0 rgba(255,255,255,0);
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      background: rgba(10, 20, 40, 0.0);
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
       transition:
         transform 0.25s ease,
         background 0.25s ease,
@@ -103,31 +107,31 @@
       position: absolute;
       inset: 2px;
       border-radius: inherit;
-      background: rgba(255,255,255,0.95);
+      background: rgba(255, 255, 255, 0.95);
       opacity: 0;
       transition: opacity 0.25s ease;
     }
 
     /* active circles */
-    #s0:checked ~ .app .progress-dot[data-step="0"],
-    #s1:checked ~ .app .progress-dot[data-step="1"],
-    #s2:checked ~ .app .progress-dot[data-step="2"],
-    #s3:checked ~ .app .progress-dot[data-step="3"],
-    #s4:checked ~ .app .progress-dot[data-step="4"],
-    #s5:checked ~ .app .progress-dot[data-step="5"] {
+    #s0:checked~.app .progress-dot[data-step="0"],
+    #s1:checked~.app .progress-dot[data-step="1"],
+    #s2:checked~.app .progress-dot[data-step="2"],
+    #s3:checked~.app .progress-dot[data-step="3"],
+    #s4:checked~.app .progress-dot[data-step="4"],
+    #s5:checked~.app .progress-dot[data-step="5"] {
       opacity: 1;
-      border-color: rgba(255,255,255,1);
-      background: rgba(60,110,200,0.8);
+      border-color: rgba(255, 255, 255, 1);
+      background: rgba(60, 110, 200, 0.8);
       transform: scale(1.3);
-      box-shadow: 0 0 12px rgba(168,214,255,0.9);
+      box-shadow: 0 0 12px rgba(168, 214, 255, 0.9);
     }
 
-    #s0:checked ~ .app .progress-dot[data-step="0"]::after,
-    #s1:checked ~ .app .progress-dot[data-step="1"]::after,
-    #s2:checked ~ .app .progress-dot[data-step="2"]::after,
-    #s3:checked ~ .app .progress-dot[data-step="3"]::after,
-    #s4:checked ~ .app .progress-dot[data-step="4"]::after,
-    #s5:checked ~ .app .progress-dot[data-step="5"]::after {
+    #s0:checked~.app .progress-dot[data-step="0"]::after,
+    #s1:checked~.app .progress-dot[data-step="1"]::after,
+    #s2:checked~.app .progress-dot[data-step="2"]::after,
+    #s3:checked~.app .progress-dot[data-step="3"]::after,
+    #s4:checked~.app .progress-dot[data-step="4"]::after,
+    #s5:checked~.app .progress-dot[data-step="5"]::after {
       opacity: 1;
     }
 
@@ -135,7 +139,8 @@
     .book-wrapper {
       position: relative;
       display: inline-block;
-      margin-top: 40px; /* room for progress bar */
+      margin-top: 40px;
+      /* room for progress bar */
     }
 
     .book-outer {
@@ -164,7 +169,7 @@
       width: 100%;
       height: 100%;
       border-radius: 20px;
-      background: rgba(249,247,243,0.05);
+      background: rgba(249, 247, 243, 0.05);
       position: relative;
       overflow: hidden;
       box-shadow: 0 25px 40px rgba(0, 0, 0, 0.55);
@@ -192,12 +197,29 @@
       transition: transform 0.9s cubic-bezier(0.645, 0.045, 0.355, 1);
     }
 
-    .spread[data-spread="0"] { z-index: 20; }
-    .spread[data-spread="1"] { z-index: 19; }
-    .spread[data-spread="2"] { z-index: 18; }
-    .spread[data-spread="3"] { z-index: 17; }
-    .spread[data-spread="4"] { z-index: 16; }
-    .spread[data-spread="5"] { z-index: 15; }
+    .spread[data-spread="0"] {
+      z-index: 20;
+    }
+
+    .spread[data-spread="1"] {
+      z-index: 19;
+    }
+
+    .spread[data-spread="2"] {
+      z-index: 18;
+    }
+
+    .spread[data-spread="3"] {
+      z-index: 17;
+    }
+
+    .spread[data-spread="4"] {
+      z-index: 16;
+    }
+
+    .spread[data-spread="5"] {
+      z-index: 15;
+    }
 
     .spread.flipped {
       transform: rotateY(-180deg);
@@ -261,21 +283,30 @@
       cursor: pointer;
       z-index: 40;
     }
-    .spread-hotspot.prev { left: 0; }
-    .spread-hotspot.next { right: 0; }
+
+    .spread-hotspot.prev {
+      left: 0;
+    }
+
+    .spread-hotspot.next {
+      right: 0;
+    }
 
     /* BLUR TEXT LAYER – scattered notes, with vellum background */
     .page-text {
       position: absolute;
-      color: #1F5EDB;                    /* medium blue text */
+      color: #1F5EDB;
+      /* medium blue text */
       font-size: 0.9rem;
       line-height: 1.4;
       max-width: 230px;
-      padding: 10px 12px;                /* vellum padding */
+      padding: 10px 12px;
+      /* vellum padding */
       border-radius: 12px;
-      background: rgba(248, 250, 255, 0.78); /* vellum-ish */
-      border: 1px solid rgba(255,255,255,0.65);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      background: rgba(248, 250, 255, 0.78);
+      /* vellum-ish */
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
       backdrop-filter: blur(6px);
 
       /* text-shadow removed */
@@ -287,14 +318,16 @@
         filter 0.8s cubic-bezier(0.33, 0.01, 0.25, 1),
         opacity 0.8s cubic-bezier(0.33, 0.01, 0.25, 1),
         transform 0.8s cubic-bezier(0.33, 0.01, 0.25, 1);
-      z-index: 50; /* above book, below stickers */
+      z-index: 50;
+      /* above book, below stickers */
     }
 
     .page-text strong {
       font-size: 0.95rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: #163368;     /* darker blue for headings */
+      color: #163368;
+      /* darker blue for headings */
     }
 
     .page-text.active-text {
@@ -331,8 +364,13 @@
     }
 
     @keyframes draw-line {
-      from { stroke-dashoffset: var(--line-length); }
-      to   { stroke-dashoffset: 0; }
+      from {
+        stroke-dashoffset: var(--line-length);
+      }
+
+      to {
+        stroke-dashoffset: 0;
+      }
     }
 
     /* CLICK SPARK */
@@ -345,6 +383,7 @@
       height: 0;
       z-index: 9999;
     }
+
     .click-spark-core {
       width: 10px;
       height: 10px;
@@ -354,6 +393,7 @@
       animation: spark-core 450ms ease-out forwards;
       box-shadow: 0 0 18px rgba(143, 203, 255, 0.9);
     }
+
     .click-spark-ring {
       width: 28px;
       height: 28px;
@@ -362,6 +402,7 @@
       transform: translate(-50%, -50%);
       animation: spark-ring 500ms ease-out forwards;
     }
+
     .click-spark-particle {
       width: 6px;
       height: 6px;
@@ -369,21 +410,45 @@
       border-radius: 999px;
       transform: translate(-50%, -50%);
       animation: spark-particle 520ms ease-out forwards;
-      box-shadow: 0 0 10px rgba(161,214,255,0.9);
+      box-shadow: 0 0 10px rgba(161, 214, 255, 0.9);
     }
 
     @keyframes spark-core {
-      0% { transform: translate(-50%, -50%) scale(0.2); opacity: 1; }
-      70% { transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; }
+      0% {
+        transform: translate(-50%, -50%) scale(0.2);
+        opacity: 1;
+      }
+
+      70% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
+
     @keyframes spark-ring {
-      0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0.7; }
-      100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+      0% {
+        transform: translate(-50%, -50%) scale(0.4);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+      }
     }
+
     @keyframes spark-particle {
-      0% { opacity: 1; }
-      100% { opacity: 0; transform: translate(var(--dx), var(--dy)); }
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy));
+      }
     }
   </style>
 </head>
@@ -412,26 +477,16 @@
     <div class="main">
       <div class="book-wrapper">
         <!-- stickers scattered farther from the book -->
-        <img src="Picture/sticker1.png" class="sticker-instance ambient-sticker"
-             style="top:-140px; left:-8%;" />
-        <img src="Picture/sticker2.png" class="sticker-instance ambient-sticker"
-             style="top:-160px; right:-6%;" />
-        <img src="Picture/sticker3.png" class="sticker-instance ambient-sticker"
-             style="left:-150px; top:-10px;" />
-        <img src="Picture/sticker4.png" class="sticker-instance ambient-sticker"
-             style="right:-160px; top:15%;" />
-        <img src="Picture/sticker5.png" class="sticker-instance ambient-sticker"
-             style="bottom:-150px; left:-4%;" />
-        <img src="Picture/sticker6.png" class="sticker-instance ambient-sticker"
-             style="bottom:-160px; right:-5%;" />
-        <img src="Picture/sticker7.png" class="sticker-instance ambient-sticker"
-             style="top:40%; left:-180px;" />
-        <img src="Picture/sticker8.png" class="sticker-instance ambient-sticker"
-             style="top:48%; right:-190px;" />
-        <img src="Picture/sticker3.png" class="sticker-instance ambient-sticker"
-             style="top:-130px; left:35%;" />
-        <img src="Picture/sticker5.png" class="sticker-instance ambient-sticker"
-             style="bottom:-140px; right:35%;" />
+        <img src="Picture/sticker1.png" class="sticker-instance ambient-sticker" style="top:-140px; left:-8%;" />
+        <img src="Picture/sticker2.png" class="sticker-instance ambient-sticker" style="top:-160px; right:-6%;" />
+        <img src="Picture/sticker3.png" class="sticker-instance ambient-sticker" style="left:-150px; top:-10px;" />
+        <img src="Picture/sticker4.png" class="sticker-instance ambient-sticker" style="right:-160px; top:15%;" />
+        <img src="Picture/sticker5.png" class="sticker-instance ambient-sticker" style="bottom:-150px; left:-4%;" />
+        <img src="Picture/sticker6.png" class="sticker-instance ambient-sticker" style="bottom:-160px; right:-5%;" />
+        <img src="Picture/sticker7.png" class="sticker-instance ambient-sticker" style="top:40%; left:-180px;" />
+        <img src="Picture/sticker8.png" class="sticker-instance ambient-sticker" style="top:48%; right:-190px;" />
+        <img src="Picture/sticker3.png" class="sticker-instance ambient-sticker" style="top:-130px; left:35%;" />
+        <img src="Picture/sticker5.png" class="sticker-instance ambient-sticker" style="bottom:-140px; right:35%;" />
 
         <div class="book-outer">
           <div class="book-shadow"></div>
@@ -442,8 +497,7 @@
                 <div class="page-half left" style="background-image:none;">
                   <div class="page-overlay" data-spread="0" data-side="left"></div>
                 </div>
-                <div class="page-half right"
-                     style="background-image:url('Picture/cover.png');">
+                <div class="page-half right" style="background-image:url('Picture/cover.png');">
                   <div class="page-overlay" data-spread="0" data-side="right"></div>
                 </div>
               </div>
@@ -453,12 +507,10 @@
             <!-- SPREAD 1: Page 1 | Page 2 -->
             <div class="spread" data-spread="1">
               <div class="spread-inner">
-                <div class="page-half left"
-                     style="background-image:url('Picture/Page%201.png');">
+                <div class="page-half left" style="background-image:url('Picture/Page%201.png');">
                   <div class="page-overlay" data-spread="1" data-side="left"></div>
                 </div>
-                <div class="page-half right"
-                     style="background-image:url('Picture/Page%202.png');">
+                <div class="page-half right" style="background-image:url('Picture/Page%202.png');">
                   <div class="page-overlay" data-spread="1" data-side="right"></div>
                 </div>
               </div>
@@ -469,12 +521,10 @@
             <!-- SPREAD 2: Page 3 | Page 4 -->
             <div class="spread" data-spread="2">
               <div class="spread-inner">
-                <div class="page-half left"
-                     style="background-image:url('Picture/Page%203.png');">
+                <div class="page-half left" style="background-image:url('Picture/Page%203.png');">
                   <div class="page-overlay" data-spread="2" data-side="left"></div>
                 </div>
-                <div class="page-half right"
-                     style="background-image:url('Picture/Page%204.png');">
+                <div class="page-half right" style="background-image:url('Picture/Page%204.png');">
                   <div class="page-overlay" data-spread="2" data-side="right"></div>
                 </div>
               </div>
@@ -485,12 +535,10 @@
             <!-- SPREAD 3: Page 5 | Page 6 -->
             <div class="spread" data-spread="3">
               <div class="spread-inner">
-                <div class="page-half left"
-                     style="background-image:url('Picture/Page%205.png');">
+                <div class="page-half left" style="background-image:url('Picture/Page%205.png');">
                   <div class="page-overlay" data-spread="3" data-side="left"></div>
                 </div>
-                <div class="page-half right"
-                     style="background-image:url('Picture/Page%206.png');">
+                <div class="page-half right" style="background-image:url('Picture/Page%206.png');">
                   <div class="page-overlay" data-spread="3" data-side="right"></div>
                 </div>
               </div>
@@ -501,12 +549,10 @@
             <!-- SPREAD 4: Page 7 | Page 8 -->
             <div class="spread" data-spread="4">
               <div class="spread-inner">
-                <div class="page-half left"
-                     style="background-image:url('Picture/Page%207.png');">
+                <div class="page-half left" style="background-image:url('Picture/Page%207.png');">
                   <div class="page-overlay" data-spread="4" data-side="left"></div>
                 </div>
-                <div class="page-half right"
-                     style="background-image:url('Picture/Page%208.png');">
+                <div class="page-half right" style="background-image:url('Picture/Page%208.png');">
                   <div class="page-overlay" data-spread="4" data-side="right"></div>
                 </div>
               </div>
@@ -517,8 +563,7 @@
             <!-- SPREAD 5: Page 9 | blank -->
             <div class="spread" data-spread="5">
               <div class="spread-inner">
-                <div class="page-half left"
-                     style="background-image:url('Picture/Page%209.png');">
+                <div class="page-half left" style="background-image:url('Picture/Page%209.png');">
                   <div class="page-overlay" data-spread="5" data-side="left"></div>
                 </div>
                 <div class="page-half right" style="background-image:none;">
@@ -543,155 +588,128 @@
         <!-- SCATTERED TEXT SNIPPETS -->
 
         <!-- Spread 0 text bits -->
-        <div class="page-text" data-spread="0"
-             style="top:-40px; left:18%;">
-         
+        <div class="page-text" data-spread="0" style="top:-40px; left:18%;">
+
           Since I can’t rewrite yesterday,
 
         </div>
 
-        <div class="page-text" data-spread="0"
-             style="top:15%; right:12%;">
-           I stitch together only the pretty parts.
+        <div class="page-text" data-spread="0" style="top:15%; right:12%;">
+          I stitch together only the pretty parts.
         </div>
 
-        <div class="page-text" data-spread="0"
-             style="top:28%; left:12%;">
-         Even if it feels like selective edits,
+        <div class="page-text" data-spread="0" style="top:28%; left:12%;">
+          Even if it feels like selective edits,
         </div>
 
-        <div class="page-text" data-spread="0"
-             style="bottom:-5px; right:20%;">
-         Jump until it hurts!
+        <div class="page-text" data-spread="0" style="bottom:-5px; right:20%;">
+          Jump until it hurts!
         </div>
 
-        <div class="page-text" data-spread="0"
-             style="top:48%; left:30%;">
-         Toss away anything too heavy to keep!
+        <div class="page-text" data-spread="0" style="top:48%; left:30%;">
+          Toss away anything too heavy to keep!
         </div>
 
         <!-- Spread 1 text bits -->
-        <div class="page-text" data-spread="1"
-             style="top:8%; left:10%;">
-        
-        Everyone's been taking about
+        <div class="page-text" data-spread="1" style="top:8%; left:10%;">
+
+          Everyone's been taking about
         </div>
 
-        <div class="page-text" data-spread="1"
-             style="bottom:-10px; left:25%;">
-           After all, which came first, the lies or the truth?
+        <div class="page-text" data-spread="1" style="bottom:-10px; left:25%;">
+          After all, which came first, the lies or the truth?
         </div>
 
-        <div class="page-text" data-spread="1"
-             style="top:32%; right:8%;">
-         That comic that is popular recently
+        <div class="page-text" data-spread="1" style="top:32%; right:8%;">
+          That comic that is popular recently
         </div>
 
-        <div class="page-text" data-spread="1"
-             style="top:55%; left:6%;">
-         But I actually haven't seen it at all
+        <div class="page-text" data-spread="1" style="top:55%; left:6%;">
+          But I actually haven't seen it at all
         </div>
 
-        <div class="page-text" data-spread="1"
-             style="top:40%; right:25%;">
+        <div class="page-text" data-spread="1" style="top:40%; right:25%;">
           "I know! I know! That's super cool!"
         </div>
 
-        <div class="page-text" data-spread="1"
-             style="bottom:15%; left:48%;">
-         It was too troublesome to be courteous, so I changed my way
+        <div class="page-text" data-spread="1" style="bottom:15%; left:48%;">
+          It was too troublesome to be courteous, so I changed my way
         </div>
 
         <!-- Spread 2 text bits -->
-        <div class="page-text" data-spread="2"
-             style="top:-30px; right:20%;">
-      
+        <div class="page-text" data-spread="2" style="top:-30px; right:20%;">
+
           Wave my arms around!
         </div>
 
-        <div class="page-text" data-spread="2"
-             style="bottom:-5px; right:12%;">
+        <div class="page-text" data-spread="2" style="bottom:-5px; right:12%;">
           Surely I can keep living this way
         </div>
 
-        <div class="page-text" data-spread="2"
-             style="top:40%; left:14%;">
+        <div class="page-text" data-spread="2" style="top:40%; left:14%;">
           Pretending that the destination was different from the beginning
         </div>
 
-        <div class="page-text" data-spread="2"
-             style="top:55%; right:32%;">
+        <div class="page-text" data-spread="2" style="top:55%; right:32%;">
           Even so, if the goal remains the same
         </div>
 
-        <div class="page-text" data-spread="2"
-             style="top:20%; left:22%;">
-             Throw away everything I've had so far
+        <div class="page-text" data-spread="2" style="top:20%; left:22%;">
+          Throw away everything I've had so far
         </div>
 
-        <div class="page-text" data-spread="2"
-             style="bottom:-18px; left:10%;">
+        <div class="page-text" data-spread="2" style="bottom:-18px; left:10%;">
           Although it's full of nothing, there's still a future
         </div>
 
         <!-- Spread 3 text bits -->
-        <div class="page-text" data-spread="3"
-             style="top:12%; left:20%;">
-       
+        <div class="page-text" data-spread="3" style="top:12%; left:20%;">
+
           The artificial flowers can also touch people's hearts, right?
         </div>
 
-        <div class="page-text" data-spread="3"
-             style="bottom:-15px; right:18%;">
-           After all, am I happy now or actually unhappy?
+        <div class="page-text" data-spread="3" style="bottom:-15px; right:18%;">
+          After all, am I happy now or actually unhappy?
         </div>
 
-        <div class="page-text" data-spread="3"
-             style="top:45%; right:5%;">
+        <div class="page-text" data-spread="3" style="top:45%; right:5%;">
           Even at night alone, fake light will still shine on me
         </div>
 
-        <div class="page-text" data-spread="3"
-             style="top:63%; left:36%;">
-        A tomorrow that I turn away from due to uneasiness
+        <div class="page-text" data-spread="3" style="top:63%; left:36%;">
+          A tomorrow that I turn away from due to uneasiness
         </div>
 
 
 
         <!-- Spread 4 text bits -->
-        <div class="page-text" data-spread="4"
-             style="top:12%; left:18%;">
-    
+        <div class="page-text" data-spread="4" style="top:12%; left:18%;">
+
           Suppose it begins to rain heavily
         </div>
 
-        <div class="page-text" data-spread="4"
-             style="top:50%; right:10%;">
+        <div class="page-text" data-spread="4" style="top:50%; right:10%;">
           Even when I'm soaked and helpless
         </div>
 
-        <div class="page-text" data-spread="4"
-             style="bottom:-10px; left:28%;">
+        <div class="page-text" data-spread="4" style="bottom:-10px; left:28%;">
           If I have glasses that can see the blue sky
-It feels like the weather is clear, right?
+          It feels like the weather is clear, right?
         </div>
 
         <!-- Spread 5 text bits -->
-        <div class="page-text" data-spread="5"
-             style="top:18%; left:22%;">
-         
+        <div class="page-text" data-spread="5" style="top:18%; left:22%;">
+
           If the past can't be changed
         </div>
 
-        <div class="page-text" data-spread="5"
-             style="top:44%; right:12%;">
+        <div class="page-text" data-spread="5" style="top:44%; right:12%;">
           Just tie the good parts together
         </div>
 
-        <div class="page-text" data-spread="5"
-             style="bottom:-12px; left:25%;">
+        <div class="page-text" data-spread="5" style="bottom:-12px; left:25%;">
           Even if it seems like biased reporting
-Surely, it's not bad to survive like this
+          Surely, it's not bad to survive like this
         </div>
       </div>
     </div>
@@ -772,7 +790,7 @@ Surely, it's not bad to survive like this
       path.style.strokeDashoffset = length;
 
       path.style.animation = "none";
-      void path.getBoundingClientRect(); // reset
+      void path.getBoundingClientRect(); 
 
       path.classList.add("active");
       path.style.animation = "draw-line 1.8s ease-out forwards";
@@ -789,7 +807,7 @@ Surely, it's not bad to survive like this
       });
 
       // best-effort play (browser may block before any user gesture)
-      sound.play().catch(() => {});
+      sound.play().catch(() => { });
     }
 
     function updateFromRadio() {
@@ -832,7 +850,7 @@ Surely, it's not bad to survive like this
       const spark = document.createElement("div");
       spark.className = "click-spark";
       spark.style.left = `${e.clientX}px`;
-      spark.style.top  = `${e.clientY}px`;
+      spark.style.top = `${e.clientY}px`;
 
       const core = document.createElement("div");
       core.className = "click-spark-core";
@@ -846,7 +864,7 @@ Surely, it's not bad to survive like this
         const p = document.createElement("div");
         p.className = "click-spark-particle";
         const angle = (Math.PI * 2 * i) / 6 + Math.random() * 0.4;
-        const dist  = 20 + Math.random() * 10;
+        const dist = 20 + Math.random() * 10;
         p.style.setProperty("--dx", `${Math.cos(angle) * dist}px`);
         p.style.setProperty("--dy", `${Math.sin(angle) * dist}px`);
         spark.appendChild(p);
@@ -860,4 +878,5 @@ Surely, it's not bad to survive like this
     updateFromRadio();
   </script>
 </body>
+
 </html>
