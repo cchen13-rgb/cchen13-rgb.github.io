@@ -1,35 +1,34 @@
 // DOM references
-const timeDisplay = document.getElementById("time-display");
+const timeDisplay      = document.getElementById("time-display");
 const offeringsDisplay = document.getElementById("offerings-count");
-const gardenEl = document.getElementById("garden");
-const offeringBtn = document.getElementById("place-offering");
+const gardenEl         = document.getElementById("garden");
+const fxLayer          = document.getElementById("fx-layer"); // optional FX layer
+const offeringBtn      = document.getElementById("place-offering");
 
 // Chat log elements
 const chatWrapper = document.getElementById("chat-log-wrapper");
-const chatHeader = document.getElementById("chat-log-header");
-const logList = document.getElementById("chat-log");
-const chatEmpty = document.getElementById("chat-empty");
-
+const logList     = document.getElementById("chat-log");
+const chatEmpty   = document.getElementById("chat-empty");
 
 // Opening overlay
 const openingOverlay = document.getElementById("opening-overlay");
 
 // Index / catalog elements
-const indexButton = document.getElementById("index-button");
+const indexButton    = document.getElementById("index-button");
 const catalogOverlay = document.getElementById("catalog-overlay");
-const catalogGrid = document.getElementById("catalog-grid");
-const catalogTabs = document.querySelectorAll(".catalog-tab");
-const catalogClose = document.getElementById("catalog-close");
+const catalogGrid    = document.getElementById("catalog-grid");
+const catalogTabs    = document.querySelectorAll(".catalog-tab");
+const catalogClose   = document.getElementById("catalog-close");
 
 // Config
-const STORAGE_KEY = "yokaiGardenState_v7";
+const STORAGE_KEY          = "yokaiGardenState_v7";
 const OFFERING_LIFETIME_MS = 2 * 60 * 60 * 1000; // 2 hours
 const MAX_ACTIVE_OFFERINGS = 15;
 
 // Time helpers
 function getTimeOfDay(date = new Date()) {
   const h = date.getHours();
-  if (h >= 5 && h < 12) return "morning";
+  if (h >= 5 && h < 12)  return "morning";
   if (h >= 12 && h < 18) return "afternoon";
   if (h >= 18 && h < 23) return "evening";
   return "night";
@@ -120,7 +119,7 @@ function loadState() {
     const parsed = JSON.parse(saved);
     state = { ...state, ...parsed };
     if (!Array.isArray(state.offeringsPlaced)) state.offeringsPlaced = [];
-    if (!Array.isArray(state.activeYokai)) state.activeYokai = [];
+    if (!Array.isArray(state.activeYokai))     state.activeYokai     = [];
   } catch (e) {
     console.warn("Error loading state", e);
   }
@@ -130,7 +129,7 @@ function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
 
-// colors for chat
+// Chat colors
 const MEMO_COLORS = [
   "#a9a4f1ff",
   "#b0deffff",
@@ -193,7 +192,7 @@ function renderGardenEmptyIfNeeded() {
 // Positioning
 function getInitialYokaiPosition(yokaiDef) {
   let left = Math.random() * 70 + 10;
-  let top = Math.random() * 30 + 20;
+  let top  = Math.random() * 30 + 20;
 
   if (yokaiDef.id === "namazugami") {
     top = 35 + Math.random() * 6;
@@ -201,28 +200,28 @@ function getInitialYokaiPosition(yokaiDef) {
 
   if (yokaiDef.id === "abumi_guchi") {
     left = 12 + Math.random() * 18;
-    top = 38 + Math.random() * 6;
+    top  = 38 + Math.random() * 6;
   }
 
   if (yokaiDef.id === "moku_mokuren") {
     const side = Math.random() < 0.5 ? "left" : "right";
     left = side === "left" ? 4 : 86;
-    top = 12 + Math.random() * 18;
+    top  = 12 + Math.random() * 18;
   }
 
   if (yokaiDef.id === "ushi_no_toki") {
     left = 45 + Math.random() * 10;
-    top = 32 + Math.random() * 8;
+    top  = 32 + Math.random() * 8;
   }
 
   if (yokaiDef.id === "ittan_momen") {
     left = 8;
-    top = 26 + Math.random() * 8;
+    top  = 26 + Math.random() * 8;
   }
 
   if (yokaiDef.id === "sakura_spirit") {
     left = 20 + Math.random() * 60;
-    top = 30 + Math.random() * 10;
+    top  = 30 + Math.random() * 10;
   }
 
   return { left, top };
@@ -244,11 +243,11 @@ function createYokaiElement(yokaiDef, record) {
   if (left === undefined || top === undefined) {
     const pos = getInitialYokaiPosition(yokaiDef);
     left = pos.left;
-    top = pos.top;
+    top  = pos.top;
   }
 
-  el.style.left = left + "%";
-  el.style.top = top + "%";
+  el.style.left   = left + "%";
+  el.style.top    = top + "%";
   el.style.cursor = "pointer";
 
   if (yokaiDef.id === "ushi_no_toki") {
@@ -342,7 +341,7 @@ function showYokaiInfo(yokaiDef, record) {
   addLog(message);
 }
 
-// Render offerings
+// Render offerings (with data attributes for collision + state sync)
 function renderOfferings(now) {
   const nowMs = now.getTime();
   for (const offering of state.offeringsPlaced) {
@@ -350,9 +349,14 @@ function renderOfferings(now) {
     img.src = "Pictures/sakura.png";
     img.className = "offering";
     img.style.left = offering.left + "%";
-    img.style.top = offering.top + "%";
+    img.style.top  = offering.top + "%";
 
-    const age = nowMs - offering.placedAt;
+    // Keep identity so we can remove from state when eaten
+    img.dataset.placedAt = String(offering.placedAt);
+    img.dataset.left     = String(offering.left);
+    img.dataset.top      = String(offering.top);
+
+    const age   = nowMs - offering.placedAt;
     const ratio = Math.min(Math.max(age / OFFERING_LIFETIME_MS, 0), 1);
     img.style.opacity = (1 - ratio).toFixed(2);
 
@@ -362,8 +366,12 @@ function renderOfferings(now) {
 
 // Render scene
 function render(now = new Date(), timeOfDay = getTimeOfDay(now)) {
-  timeDisplay.textContent = `${formatTime(now)} · ${timeOfDay}`;
-  offeringsDisplay.textContent = state.offerings;
+  if (timeDisplay) {
+    timeDisplay.textContent = `${formatTime(now)} · ${timeOfDay}`;
+  }
+  if (offeringsDisplay) {
+    offeringsDisplay.textContent = state.offerings;
+  }
 
   clearGarden();
   renderOfferings(now);
@@ -381,6 +389,46 @@ function render(now = new Date(), timeOfDay = getTimeOfDay(now)) {
   }
 }
 
+// ✨ Sparkles + burst around a new offering
+function spawnSparklesAt(leftPercent, topPercent) {
+  const container = fxLayer || gardenEl;
+  if (!container) return;
+
+  const offsets = [
+    { x: -30, y: -20 },
+    { x: 0,   y: -40 },
+    { x: 30,  y: -10 }
+  ];
+
+  offsets.forEach(({ x, y }) => {
+    const s = document.createElement("img");
+    s.src = "Pictures/sparkle.gif"; 
+    s.className = "sparkle";
+    s.style.left = `calc(${leftPercent}% + ${x}px)`;
+    s.style.top  = `calc(${topPercent}% + ${y}px)`;
+    container.appendChild(s);
+    setTimeout(() => s.remove(), 900);
+  });
+}
+
+function spawnOfferingBurst(leftPercent, topPercent) {
+  const container = fxLayer || gardenEl;
+  if (!container) return;
+
+  const burst = document.createElement("img");
+  burst.src = "Pictures/sakura.png";
+  burst.className = "offering-burst";
+  burst.style.left = leftPercent + "%";
+  burst.style.top  = topPercent + "%";
+  container.appendChild(burst);
+
+  spawnSparklesAt(leftPercent, topPercent);
+
+  setTimeout(() => {
+    burst.remove();
+  }, 900);
+}
+
 // Spawn logic
 function calculateChance(yokai, timeOfDay) {
   let chance = yokai.baseChance;
@@ -393,7 +441,7 @@ function calculateChance(yokai, timeOfDay) {
   const offeringBoost = Math.min(liveOfferings * 0.03, 0.3);
   chance += offeringBoost * 0.5;
 
-  const now = Date.now();
+  const now   = Date.now();
   const awayMs = now - state.lastTick;
 
   if (yokai.specialRule === "likesLongAbsence" && awayMs > 10 * 60 * 1000) {
@@ -450,7 +498,7 @@ function maybeSpawnYokai(timeOfDay) {
 
 // Cleanup
 function cleanupYokai() {
-  const now = Date.now();
+  const now          = Date.now();
   const stayDuration = 5 * 60 * 1000;
 
   const before = state.activeYokai.length;
@@ -473,9 +521,63 @@ function cleanupOfferings(simulated = false) {
   }
 }
 
+// Collision detection
+function handleDomCollisions() {
+  const yokaiEls    = Array.from(document.querySelectorAll(".yokai"));
+  const offeringEls = Array.from(document.querySelectorAll(".offering"));
+
+  if (!yokaiEls.length || !offeringEls.length) return;
+
+  const eatenIds = new Set();
+
+  offeringEls.forEach(offEl => {
+    const oRect = offEl.getBoundingClientRect();
+    const oCenterX = (oRect.left + oRect.right) / 2;
+    const oCenterY = (oRect.top  + oRect.bottom) / 2;
+
+    for (const yEl of yokaiEls) {
+      const yRect = yEl.getBoundingClientRect();
+      const yCenterX = (yRect.left + yRect.right) / 2;
+      const yCenterY = (yRect.top  + yRect.bottom) / 2;
+
+      const dx = oCenterX - yCenterX;
+      const dy = oCenterY - yCenterY;
+      const dist = Math.hypot(dx, dy);
+
+      // Touch threshold
+      const touchRadius = Math.min(yRect.width, yRect.height) * 0.5;
+
+      if (dist < touchRadius) {
+        const placedAt = offEl.dataset.placedAt;
+        if (placedAt) eatenIds.add(placedAt);
+
+        const leftPercent = parseFloat(offEl.dataset.left || "50");
+        const topPercent  = parseFloat(offEl.dataset.top  || "50");
+        spawnOfferingBurst(leftPercent, topPercent);
+
+        offEl.remove();
+        break;
+      }
+    }
+  });
+
+  if (eatenIds.size) {
+    const before = state.offeringsPlaced.length;
+    state.offeringsPlaced = state.offeringsPlaced.filter(
+      o => !eatenIds.has(String(o.placedAt))
+    );
+    saveState();
+
+    const eatenCount = before - state.offeringsPlaced.length;
+    if (eatenCount > 0) {
+      addLog(`${formatTime()} — A yokai enjoyed ${eatenCount} sakura blessing${eatenCount > 1 ? "s" : ""}.`);
+    }
+  }
+}
+
 // Tick loop
 function tick(simulated = false) {
-  const now = new Date();
+  const now       = new Date();
   const timeOfDay = getTimeOfDay(now);
 
   cleanupOfferings(simulated);
@@ -488,12 +590,18 @@ function tick(simulated = false) {
 
   saveState();
   render(now, timeOfDay);
+
+  // after everything is drawn, check for actual collisions
+  if (!simulated) {
+    handleDomCollisions();
+  }
+
   updateOfferingButtonState();
 }
 
 // Catch up from last visit
 function catchUpFromLastTick() {
-  const now = Date.now();
+  const now    = Date.now();
   const diffMs = now - state.lastTick;
   let missedTicks = Math.min(Math.floor(diffMs / 60000), 30);
 
@@ -504,33 +612,38 @@ function catchUpFromLastTick() {
 }
 
 // Offering button with cap
-offeringBtn.addEventListener("click", () => {
-  cleanupOfferings(false);
+if (offeringBtn) {
+  offeringBtn.addEventListener("click", () => {
+    cleanupOfferings(false);
 
-  const liveOfferings = state.offeringsPlaced.length;
+    const liveOfferings = state.offeringsPlaced.length;
 
-  if (liveOfferings >= MAX_ACTIVE_OFFERINGS) {
-    addLog(`${formatTime()} — The garden is filled with sakura blessings. Please wait for some to fade.`);
+    if (liveOfferings >= MAX_ACTIVE_OFFERINGS) {
+      addLog(`${formatTime()} — The garden is filled with sakura blessings. Please wait for some to fade.`);
+      updateOfferingButtonState();
+      return;
+    }
+
+    state.offerings += 1;
+
+    const left = Math.random() * 60 + 20;
+    const top  = Math.random() * 20 + 35;
+
+    state.offeringsPlaced.push({
+      left,
+      top,
+      placedAt: Date.now()
+    });
+
+    saveState();
+    addLog(`${formatTime()} — A soft sakura offering was placed.`);
+    render();
     updateOfferingButtonState();
-    return;
-  }
 
-  state.offerings += 1;
-
-  const left = Math.random() * 60 + 20;
-  const top = Math.random() * 20 + 35;
-
-  state.offeringsPlaced.push({
-    left,
-    top,
-    placedAt: Date.now()
+   
+    spawnOfferingBurst(left, top);
   });
-
-  saveState();
-  addLog(`${formatTime()} — A soft sakura offering was placed.`);
-  render();
-  updateOfferingButtonState();
-});
+}
 
 // Interaction tracking
 document.addEventListener("mousemove", () => {
@@ -543,18 +656,16 @@ document.addEventListener("click", () => {
 
 // Chat log open/close
 function toggleChat() {
+  if (!chatWrapper) return;
   chatWrapper.classList.toggle("closed");
 }
 
-
 if (chatWrapper) {
   chatWrapper.addEventListener("click", (e) => {
-
     if (e.target.closest("#chat-log")) return;
     toggleChat();
   });
 }
-
 
 /* Yokai Index */
 
@@ -562,10 +673,10 @@ function formatFavoriteTimeLabel(arr) {
   if (!arr || !arr.length) return "";
   if (arr.includes("any")) return "Any time";
   const map = {
-    morning: "Morning",
+    morning:   "Morning",
     afternoon: "Afternoon",
-    evening: "Evening",
-    night: "Night"
+    evening:   "Evening",
+    night:     "Night"
   };
   return arr.map(t => map[t] || t).join(" · ");
 }
@@ -579,16 +690,16 @@ function buildCatalog() {
     card.className = "catalog-card";
     card.dataset.times = (yokai.favoriteTime || []).join(",");
 
-    const favLabel = formatFavoriteTimeLabel(yokai.favoriteTime);
+    const favLabel  = formatFavoriteTimeLabel(yokai.favoriteTime);
     const moodLabel = yokai.mood ? `Mood: ${yokai.mood}` : "";
 
     const tags = [];
 
     if (favLabel) tags.push(favLabel);
-    if (yokai.specialRule === "nightOnlyRare") tags.push("Rare");
-    if (yokai.specialRule === "likesCrowdedGarden") tags.push("Crowd lover");
-    if (yokai.specialRule === "boostOnOffering") tags.push("Offering boosted");
-    if (yokai.specialRule === "appearsWithManySakura") tags.push("Sakura-born");
+    if (yokai.specialRule === "nightOnlyRare")          tags.push("Rare");
+    if (yokai.specialRule === "likesCrowdedGarden")     tags.push("Crowd lover");
+    if (yokai.specialRule === "boostOnOffering")        tags.push("Offering boosted");
+    if (yokai.specialRule === "appearsWithManySakura")  tags.push("Sakura-born");
 
     card.innerHTML = `
       <div class="catalog-image-wrapper">
@@ -685,4 +796,4 @@ updateOfferingButtonState();
 
 setInterval(() => {
   tick(false);
-}, 10000);
+}, 3000); 
