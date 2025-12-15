@@ -284,38 +284,38 @@ function getYokaiPersonality(yokaiDef, record) {
   const messages = {
     namazugami: [
       `"Zzz... ${timeHere} minutes of rest..."`,
-      `"I sense vibrations in this realm... ${state.totalInteractions} disturbances detected."`,
-      `"Long absences make me stronger. The quiet feeds me."`,
+      `"I sense something... ${state.totalInteractions} interactions found."`,
+      `"I am fond of your absences. The quiet is a part of me."`,
       `Mood: ${yokaiDef.mood}`
     ],
     abumi_guchi: [
       `"I've been watching for ${timeHere} minutes."`,
-      `"${state.offeringsPlaced.length} sakura offerings placed..."`,
-      `"Offerings attract me. Your generosity will be remembered."`,
+      `"${state.offeringsPlaced.length} sakura offerings are placed here"`,
+      `"Offerings feed me, thank you for your generosity."`,
       `Mood: ${yokaiDef.mood}`
     ],
     moku_mokuren: [
-      `"I've observed for ${timeHere} minutes with my many eyes."`,
-      `"Activity detected: ${Math.floor(state.totalInteractions)} interactions."`,
-      `"The more you interact, the more I see..."`,
+      `"I've observed for ${timeHere} minutes with several eyes."`,
+      `"I have detected movement: ${Math.floor(state.totalInteractions)} interactions."`,
+      `"The more you interact, the more I can see"`,
       `Mood: ${yokaiDef.mood}`
     ],
     ushi_no_toki: [
       `"${timeHere} minutes in this realm..."`,
       `"I appear only in the dark."`,
-      `"Touch me and I vanish before your eyes."`,
+      `"Touch me and I shall vanish."`,
       `Mood: ${yokaiDef.mood}`
     ],
     ittan_momen: [
       `"I have been flying around for ${timeHere} minutes!"`,
-      `"${state.activeYokai.length} friends in the garden! The more the better!"`,
+      `"${state.activeYokai.length} friends in the garden! I love to see many more!"`,
       `"I love crowded gardens full of energy!"`,
       `Mood: ${yokaiDef.mood}`
     ],
     sakura_spirit: [
-      `"Born from ${state.offeringsPlaced.length} beautiful sakura offerings..."`,
+      `"I am born from ${state.offeringsPlaced.length} offerings..."`,
       `"I've blessed this garden for ${timeHere} minutes."`,
-      `"Your blessings summoned me into here."`,
+      `"Your blessings was able to summon me into here."`,
       `Mood: ${yokaiDef.mood}`
     ]
   };
@@ -341,7 +341,7 @@ function showYokaiInfo(yokaiDef, record) {
   addLog(message);
 }
 
-// Render offerings (with data attributes for collision + state sync)
+// Render offerings
 function renderOfferings(now) {
   const nowMs = now.getTime();
   for (const offering of state.offeringsPlaced) {
@@ -351,7 +351,6 @@ function renderOfferings(now) {
     img.style.left = offering.left + "%";
     img.style.top  = offering.top + "%";
 
-    // Keep identity so we can remove from state when eaten
     img.dataset.placedAt = String(offering.placedAt);
     img.dataset.left     = String(offering.left);
     img.dataset.top      = String(offering.top);
@@ -389,7 +388,7 @@ function render(now = new Date(), timeOfDay = getTimeOfDay(now)) {
   }
 }
 
-// ✨ Sparkles + burst around a new offering
+// Sparkles
 function spawnSparklesAt(leftPercent, topPercent) {
   const container = fxLayer || gardenEl;
   if (!container) return;
@@ -591,7 +590,6 @@ function tick(simulated = false) {
   saveState();
   render(now, timeOfDay);
 
-  // after everything is drawn, check for actual collisions
   if (!simulated) {
     handleDomCollisions();
   }
